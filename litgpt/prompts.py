@@ -39,6 +39,19 @@ class Default(PromptStyle):
 
     def stop_tokens(self, tokenizer: "Tokenizer") -> Tuple[List[int], ...]:
         return ([tokenizer.eos_id],)
+    
+class MyPromptStyle(PromptStyle):
+    def apply(self, prompt: str, **kwargs: str) -> str:
+        if kwargs.get("input"):
+            return (
+                "You (I) are chatting with a user (U). Write a reply to his message.\n\n"
+                f"### Your previous communucation:\n{kwargs['input']}\n\n"
+                f"### His new message:\n{prompt}\n\n### Response:\n"
+            )
+        return (
+            "You (I) are chatting with a user (U). Write a reply to his message.\n\n"
+            f"### His new message:\n{prompt}\n\n### Response:\n"
+        )
 
 
 class Alpaca(PromptStyle):
@@ -290,6 +303,8 @@ class Gemma(PromptStyle):
 
 # Maps prompt style names to PromptStyle classes
 prompt_styles: Dict[str, Type[PromptStyle]] = {
+    # My prompt style
+    "mypromptstyle": MyPromptStyle,
     # Dataset-specific prompt styles
     "alpaca": Alpaca,
     "flan": FLAN,
