@@ -12,7 +12,7 @@ import torch._inductor.config
 from lightning.fabric.plugins import BitsandbytesPrecision
 
 from litgpt import GPT, Config, PromptStyle, Tokenizer
-from litgpt.prompts import has_prompt_style, load_prompt_style
+from litgpt.prompts import has_prompt_style, load_prompt_style, prompt_styles
 from litgpt.utils import CLI, check_valid_checkpoint_dir, get_default_supported_precision, load_checkpoint
 
 
@@ -102,6 +102,7 @@ def main(
     quantize: Optional[Literal["bnb.nf4", "bnb.nf4-dq", "bnb.fp4", "bnb.fp4-dq", "bnb.int8"]] = None,
     precision: Optional[str] = None,
     compile: bool = False,
+    prompt_style = "mypromptstyle"
 ) -> None:
     """Generates text samples based on a pre-trained model and tokenizer.
 
@@ -138,9 +139,7 @@ def main(
     checkpoint_path = checkpoint_dir / "lit_model.pth"
 
     tokenizer = Tokenizer(checkpoint_dir)
-    prompt_style = (
-        load_prompt_style(checkpoint_dir) if has_prompt_style(checkpoint_dir) else PromptStyle.from_config(config)
-    )
+    prompt_style = prompt_styles[prompt_style]()
 
     prompt = prompt_style.apply(prompt)
     encoded = tokenizer.encode(prompt, device=fabric.device)
