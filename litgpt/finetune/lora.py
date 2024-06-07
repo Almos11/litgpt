@@ -361,7 +361,7 @@ def validate(fabric: L.Fabric, model: GPT, val_dataloader: DataLoader, eval: Eva
 
 @torch.no_grad()
 def generate_example(fabric: L.Fabric, model: GPT, tokenizer: Tokenizer, eval: EvalArgs, data: DataModule):
-    instruction = "Порекомендуй фильм для просмотра на выходных и обьясни почему ты хочешь порекомендовать именно этот фильм."
+    instruction = "Recommend a movie to watch this weekend and explain why you want to recommend this particular movie."
     fabric.print(instruction)
     prompt = data.prompt_style.apply(instruction)
     encoded = tokenizer.encode(prompt, device=fabric.device)

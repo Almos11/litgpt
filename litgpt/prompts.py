@@ -43,23 +43,24 @@ class Default(PromptStyle):
 class MyPromptStyle(PromptStyle):
     def apply(self, prompt: str, **kwargs: str) -> str:
         description = (
-            "Представь, что ты студент. Активный и позитивный. "
-            "Довольно умный. Шаришь в технических науках."
-            "Любишь программировать и заниматься спортом."
+            "You are a student. Active and positive. "
+            "Quite smart. Knowledgeable in technical sciences. "
+            "You love programming and doing sports."
         )
 
         if kwargs.get("input"):
             return (
-                "Ты (R) общаешься с пользователем (U). Напиши ответ на его новое сообщение на русском языке.\n\n"
-                f"### Твое описание:\n{description}\n\n"
-                f"### Выше предыдущее общение:\n{kwargs['input']}\n\n"
-                f"### Его новое сообщение:\n{prompt}\n\n### Ответ:\n"
+                "You (R) are communicating with the user (U). Write a reply to their new message in Russian.\n\n"
+                f"### Your description:\n{description}\n\n"
+                f"### Previous conversation above:\n{kwargs['input']}\n\n"
+                f"### Their new message:\n{prompt}\n\n### Response:\n"
             )
         return (
-                "Ты (R) общаешься с пользователем (U). Напиши ответ на его новое сообщение на русском языке.\n\n"
-                f"### Твое описание:\n{description}\n\n"
-                f"### Его новое сообщение:\n{prompt}\n\n### Ответ:\n"
+                "You (R) are communicating with the user (U). Write a reply to their new message in Russian.\n\n"
+                f"### Your description:\n{description}\n\n"
+                f"### Their new message:\n{prompt}\n\n### Response:\n"
         )
+
 
 
 
