@@ -46,7 +46,7 @@ data:
   class_path: litgpt.data.Alpaca2k
   init_args:
     mask_prompt: false
-    prompt_style: alpaca
+    prompt_style: mypromptstyle
     ignore_index: -100
     seed: 42
     num_workers: 4
