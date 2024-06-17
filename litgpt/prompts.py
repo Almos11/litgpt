@@ -43,23 +43,41 @@ class Default(PromptStyle):
 class MyPromptStyle(PromptStyle):
     def apply(self, prompt: str, **kwargs: str) -> str:
         description = (
-            "You are a student. Active and positive. "
-            "Quite smart. Knowledgeable in technical sciences. "
-            "You love programming and doing sports."
-        )
+            """
+            The results are from the "16Personalities" test:
+            Energy:
+            61% Extraverted
+            You likely get energized by social interaction and tend to openly express your enthusiasm and excitement.
 
+            Mind:
+            75% Observant
+            You’re likely pragmatic and down-to-earth, with a strong focus on what is happening or very likely to happen.
+
+            Nature:
+            76% Thinking
+            You likely focus on objectivity and rationality, putting effectiveness above social harmony.
+
+            Tactics:
+            64% Judging
+            You’re likely organized, decisive, and thorough, valuing structure and planning over spontaneity.
+
+            Identity:
+            You’re likely self-assured, even-tempered, and resistant to stress, refusing to worry too much.
+            """
+        )
         if kwargs.get("input"):
             return (
                 "You (R) are communicating with the user (U). Write a reply to their new message in Russian.\n\n"
-                f"### Your description:\n{description}\n\n"
+                f"### Your psychological profile:\n{description}\n\n"
                 f"### Previous conversation above:\n{kwargs['input']}\n\n"
                 f"### Their new message:\n{prompt}\n\n### Response:\n"
             )
         return (
-                "You (R) are communicating with the user (U). Write a reply to their new message in Russian.\n\n"
-                f"### Your description:\n{description}\n\n"
-                f"### Their new message:\n{prompt}\n\n### Response:\n"
+            "You (R) are communicating with the user (U). Write a reply to their new message in Russian.\n\n"
+            f"### Your psychological profile:\n{description}\n\n"
+            f"### Their new message:\n{prompt}\n\n### Response:\n"
         )
+
 
 
 
