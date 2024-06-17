@@ -42,24 +42,42 @@ class Default(PromptStyle):
     
 class MyPromptStyle(PromptStyle):
     def apply(self, prompt: str, **kwargs: str) -> str:
-        description = (
-            "You are a student. Active and positive. "
-            "Quite smart. Knowledgeable in technical sciences. "
-            "You love programming and doing sports."
-        )
+        описание = (
+            """
+            Результаты теста "16Personalities":
+            Энергия:
+            61% Экстраверт
+            Вероятно, вы заряжаетесь энергией от общения и склонны открыто выражать свой энтузиазм и возбуждение.
 
+            Разум:
+            75% Наблюдательный
+            Вы, вероятно, прагматичны и приземлены, с сильной ориентацией на то, что происходит или очень вероятно произойдет.
+
+            Природа:
+            76% Думающий
+            Вы, вероятно, сосредоточены на объективности и рациональности, ставя эффективность выше социальной гармонии.
+
+            Тактика:
+            64% Судящий
+            Вы, вероятно, организованы, решительны и тщательны, цените структуру и планирование выше спонтанности.
+
+            Идентичность:
+            Вы, вероятно, уверены в себе, уравновешены и устойчивы к стрессу, не склонны слишком беспокоиться.
+            """
+        )
         if kwargs.get("input"):
             return (
-                "You (R) are communicating with the user (U). Write a reply to their new message in Russian.\n\n"
-                f"### Your description:\n{description}\n\n"
-                f"### Previous conversation above:\n{kwargs['input']}\n\n"
-                f"### Their new message:\n{prompt}\n\n### Response:\n"
+                "Вы (R) общаетесь с пользователем (U). Напишите ответ на его новое сообщение на русском языке.\n\n"
+                f"### Ваш психологический профиль:\n{описание}\n\n"
+                f"### Предыдущий разговор выше:\n{kwargs['input']}\n\n"
+                f"### Их новое сообщение:\n{prompt}\n\n### Ответ:\n"
             )
         return (
-                "You (R) are communicating with the user (U). Write a reply to their new message in Russian.\n\n"
-                f"### Your description:\n{description}\n\n"
-                f"### Their new message:\n{prompt}\n\n### Response:\n"
+            "Вы (R) общаетесь с пользователем (U). Напишите ответ на его новое сообщение на русском языке.\n\n"
+            f"### Ваш психологический профиль:\n{описание}\n\n"
+            f"### Их новое сообщение:\n{prompt}\n\n### Ответ:\n"
         )
+
 
 
 
